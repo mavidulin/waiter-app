@@ -1,0 +1,54 @@
+<div class="signin-container">
+  <form class="form-signin" [formGroup]="singInForm">
+    <h1 class="text-warning">Waiterly</h1>
+
+    <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+
+    <label for="inputEmail" class="sr-only">Organisation email address</label>
+    <input type="email" id="inputEmail"
+           class="form-control"
+           placeholder="Organization email address"
+           formControlName="email"
+           autofocus="">
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword"
+           class="form-control"
+           placeholder="Password"
+           formControlName="password">
+
+    <div *ngIf="formSubmittedOnce" class="mb-3 text-danger">
+      <div *ngIf="singInForm.get('email')?.errors as errors">
+        <span *ngIf="errors['required']">Organisation email is required.</span>
+        <span *ngIf="errors['email']">Email is not in the correct format.</span>
+      </div>
+
+      <div *ngIf="singInForm.get('password')?.errors as errors">
+        <span *ngIf="errors['required']">Password is required.</span>
+      </div>
+    </div>
+
+    <button class="btn btn-lg btn-warning btn-block" type="submit" (click)="signIn()">Sign in</button>
+
+    <div class="alert alert-warning alert-dismissible fade show mt-2" *ngIf="singInFailed">
+      Email or password are incorrect.
+      <button type="button" class="close" (click)="singInFailed = false">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="text-secondary text-left mt-4 small">
+      Sign in with these accounts
+      <hr class="my-1">
+
+      <div *ngFor="let org of organisations">
+        <div>email: {{org.email}}</div>
+        <div>password: {{org.password}}</div>
+
+        <hr class="my-1">
+      </div>
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,12 @@
+<h2 class="text-center mt-5">Select a Bar</h2>
+
+<div class="row mt-4">
+  <div class="col-12 col-md-4" *ngFor="let bar of (authService.activeOrganisation$ | async)?.bars">
+    <div class="card border-warning bar-card" (click)="selectBar(bar)">
+      <div class="card-body text-center">
+        {{bar.name}},
+        <div class="text-secondary">{{bar.address}}</div>
+      </div>
+    </div>
+  </div>
+</div>

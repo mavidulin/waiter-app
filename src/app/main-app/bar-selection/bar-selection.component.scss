@@ -1,0 +1,9 @@
+.bar-card {
+  cursor: pointer;
+
+  &:hover {
+    color: #212529 !important;
+    background-color: #e0a800 !important;
+    border-color: #d39e00 !important;
+  }
+}

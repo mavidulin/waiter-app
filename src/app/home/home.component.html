@@ -1,0 +1,51 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
+  <h3 class="my-0 mr-md-auto font-weight-normal text-warning">Waiterly</h3>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="#">Features</a>
+    <a class="p-2 text-dark" href="#">Support</a>
+    <a class="p-2 text-dark" href="#">Pricing</a>
+  </nav>
+
+  <a class="btn btn-outline-warning" [routerLink]="['/sign-in']" *ngIf="!(authService.activeOrganisation$ | async)">Sign in</a>
+
+  <a class="btn btn-outline-warning"
+     [routerLink]="['/app/bar-selection']"
+     *ngIf="(authService.activeOrganisation$ | async) as activeOrganisation">{{activeOrganisation.name}} <fa-icon icon="sign-in-alt" class="ml-1"></fa-icon></a>
+</div>
+
+<div class=" home-image-container"></div>
+
+<footer class="pt-4 pt-md-5 border-top bg-dark text-white">
+  <div class="row">
+    <div class="col-12 col-md">
+      <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+      <small class="d-block mb-3 ml-2 text-muted">© 2019</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Bar Management</a></li>
+        <li><a class="text-muted" href="#">Random feature</a></li>
+        <li><a class="text-muted" href="#">Cool feature</a></li>
+        <li><a class="text-muted" href="#">Another one</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Support</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Help & Learning </a></li>
+        <li><a class="text-muted" href="#">Blog</a></li>
+        <li><a class="text-muted" href="#">Other</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Team</a></li>
+        <li><a class="text-muted" href="#">Locations</a></li>
+        <li><a class="text-muted" href="#">Privacy</a></li>
+        <li><a class="text-muted" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

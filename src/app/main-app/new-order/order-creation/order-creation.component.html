@@ -1,0 +1,76 @@
+<h4>New Order For {{tableId}}</h4>
+
+<!-- ToDo: It would be better to further separate selected items section and price list items selector sections into separate components with OnPush strategies -->
+<div class="row">
+  <!-- Selected Items -->
+  <div class="col-8 border-right">
+    <ng-container *ngIf="itemsFormArray.controls.length; else nonSelected">
+
+      <form [formGroup]="orderForm">
+        <ul class="list-group">
+          <li class="list-group-item" formArrayName="items" *ngFor="let item of itemsFormArray.controls; let index = index">
+            <button class="btn btn-secondary remove-btn" (click)="removeItem(index)"><fa-icon icon="trash"></fa-icon></button>
+            {{item.get('name').value}}
+
+            <div class="float-right">
+              <div class="d-inline-block border-right text-secondary h-100 pr-2 mr-1">
+                {{item.get('price').value | number:'.2'}} $
+              </div>
+
+              Qty:
+              <div class="d-inline-block" [formGroupName]="index">
+                <input type="number" class="form-control qty-input" formControlName="qty" min="1">
+              </div>
+
+              <div class="btn-group qty-buttons">
+                <button class="btn btn-outline-primary" (click)="increaseQty(index)"><fa-icon icon="plus"></fa-icon></button>
+                <button class="btn btn-outline-primary" (click)="decreaseQty(index)"><fa-icon icon="minus"></fa-icon></button>
+              </div>
+            </div>
+
+            <div *ngIf="item.get('qty')?.errors as errors" class="alert alert-danger mb-0 selection-error">
+              <span *ngIf="errors['required']">Quantity is required</span>
+              <span *ngIf="errors['min']">Invalid quantity</span>
+            </div>
+          </li>
+        </ul>
+      </form>
+
+      <div class="text-right font-weight-bold mt-2">
+        Total: {{(total$|async) | number:'.2'}} $
+      </div>
+
+    </ng-container>
+
+    <ng-template #nonSelected>
+      <p class="text-secondary mt-2">Select items...</p>
+    </ng-template>
+
+    <div class="mt-2">
+      <button class="btn btn-outline-secondary float-left" (click)="discard()">Discard</button>
+
+      <button class="btn btn-success float-right"
+              *ngIf="itemsFormArray.controls.length"
+              (click)="createReceipt()"
+              [disabled]="orderForm.invalid">
+        Create Receipt
+      </button>
+    </div>
+  </div>
+
+  <!-- Price List Items Selector -->
+  <div class="col-4">
+    <div class="row mb-3" *ngFor="let priceListSection of (coreService.activeBar$|async).priceList">
+      <div class="col-12 category-name"><h5>{{priceListSection.category}}</h5></div>
+
+      <div class="col-12 col-sm-6 col-md-4 price-list-item" *ngFor="let priceListItem of priceListSection.items">
+        <div class="card" (click)="addItem(priceListItem)" [class.disabled]="isItemAdded(priceListItem)" [class.border-warning]="!isItemAdded(priceListItem)">
+          <div class="card-body p-1" title="{{priceListItem.name}}">
+            {{priceListItem.name}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

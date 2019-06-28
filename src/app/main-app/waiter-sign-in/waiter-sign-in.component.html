@@ -1,0 +1,19 @@
+<div class="modal-body">
+  <h5>Enter a PIN</h5>
+
+  <input type="password" class="form-control" #pinControl autofocus="" (keydown.enter)="signIn(pinControl.value)">
+
+  <div class="alert alert-warning alert-dismissible fade show mt-2" *ngIf="signInError$|async">
+    Waiter with the PIN not found
+    <button type="submit" class="close" (click)="closeError()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="text-secondary text-left mt-2 small">
+    <div>Available PINs for this bar: {{getAvailablePins()}}</div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="signIn(pinControl.value)">Sign In</button>
+</div>

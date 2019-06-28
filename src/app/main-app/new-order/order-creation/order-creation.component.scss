@@ -1,0 +1,54 @@
+.price-list-item {
+  padding: 5px;
+
+  .card {
+    font-size: 12px;
+    height: 40px;
+    overflow: hidden;
+
+    &:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+
+    &.disabled {
+      background-color: grey;
+      pointer-events: none;
+    }
+  }
+}
+
+.category-name {
+  padding-left: 5px;
+}
+
+.list-group-item {
+  padding: 0;
+
+  .remove-btn {
+    border-radius: 0;
+  }
+
+  .qty-input {
+    width: 55px;
+    display: inline-block;
+    border-radius: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .selection-error {
+    font-size: 14px;
+    padding: 2px;
+    border-radius: 0;
+    text-align: right;
+  }
+
+  .qty-buttons {
+    vertical-align: top;
+
+    button {
+      border-radius: 0;
+    }
+  }
+}

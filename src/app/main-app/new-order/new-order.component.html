@@ -1,0 +1,3 @@
+<app-order-creation *ngIf="!receipt" [tableId]="tableId$|async" (showReceipt)="showReceipt($event)"></app-order-creation>
+
+<app-receipt *ngIf="receipt" [receipt]="receipt"></app-receipt>

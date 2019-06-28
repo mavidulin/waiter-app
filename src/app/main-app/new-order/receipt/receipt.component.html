@@ -1,0 +1,28 @@
+<div id="section-to-print">
+
+  <h4 class="text-center">Receipt</h4>
+
+  <div class="top-content mb-4">
+    <p>{{receipt.organisation.name}}</p>
+    <p>{{receipt.bar.name}}, {{receipt.bar.address}}</p>
+    <p>Created By: {{receipt.waiter.name}}</p>
+    <p>Table: {{receipt.table}}</p>
+    <p>{{receipt.date.toLocaleString()}}</p>
+  </div>
+
+  <div class="row border-top mb-2" *ngFor="let item of receipt.items">
+    <div class="col-7 col-sm-6">{{item.name}}</div>
+    <div class="col-5 col-sm-2 text-right">{{item.price | number:'.2'}} $ * {{item.qty}}</div>
+    <div class="col-12 col-sm-4 text-right">{{(item.price * item.qty) | number:'.2'}} $</div>
+  </div>
+
+  <div class="text-right font-weight-bold mt-4">
+    Total: {{receipt.total | number:'.2'}} $
+  </div>
+
+</div>
+
+<div class="text-right mt-4">
+  <button class="btn btn-outline-primary mr-2" (click)="print()">Print</button>
+  <button class="btn btn-primary" (click)="done()">Done</button>
+</div>
